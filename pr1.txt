@@ -1,3 +1,5 @@
-Den här är något som jag övar just nu i klassen, Programmeringsmetodik. Git, GitHub.
+Den hÃ¤r Ã¤r nÃ¥got som jag Ã¶var just nu i klassen, Programmeringsmetodik. Git, GitHub.
 
 Added new text after commit
+
+This is the second change from remote GitHub
