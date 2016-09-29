@@ -1,4 +1,3 @@
-# yagh
+# GitHub Repository
 
-Here I am to see how GitHub works and to learn it. 
-Test testtest
+Here is my personal GitHub repository for exercise!
