@@ -1,5 +1,6 @@
 # Mina Uppgifter
-## Subtitle
+## JavaScript 2
+# Design Pattern
 
 * ul1
 * ul2
