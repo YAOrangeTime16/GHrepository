@@ -39,8 +39,8 @@ let outputData = (function() {
     };
 
     //"cover" is an optional item so far, and
-    //it isn't necessary when an instance is created
-    //that is why I created cover as a prototype of "Create"-based objects
+    //it isn't necessary when an instance is created.
+    //That is why I set "cover" as a prototype of "Create"-based objects
     Create.prototype.cover = function(imgUrl){
         this.cover=imgUrl;
     }
@@ -69,7 +69,7 @@ let outputData = (function() {
         })
         //Saving the matching movie as an array to a variable "myMovieObj" (= [myMovieObj])
         myMovieObj = filteredMovie;
-        //if [myMovieObj] has a movie object, print out the movie title
+        //If [myMovieObj] has a movie object, print out the movie title
         //And if users wish to add genre and rating to the movie, they can do so from the selectors
         if(myMovieObj.length>0){
             listingDiv.innerHTML= `<span class="ltxt padding-side bg_op"> ${myMovieObj[0].title.toUpperCase()} (${myMovieObj[0].year})</span>
