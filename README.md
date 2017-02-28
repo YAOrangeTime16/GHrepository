@@ -5,7 +5,7 @@ https://yaorangetime16.github.io/Uppgifter/
 
 Module Pattern | Constructor Pattern 
 ------------ | -------------
-..makes it easy to find a target function among many others | ..is useful to create an instance of a movie
+..makes it easy to find a target function among many others | ..is useful to create an instance of a movie anywhere with its simple coding
 
 I tried using two different modules in the beginning; one for input and the other for output, but soon, I found it was unnecessary to separate those two functions and I shouldn't do so (because some functions are connected to each other by using the same value, etc). Eventually, used one module pattern to this assignment
 
