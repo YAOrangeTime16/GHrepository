@@ -1,30 +1,50 @@
 //The data(array) of movies is saved as an external file; "data.js"
 
-//Get all emelements here
-let btn_allList=document.getElementById('btn_allList');
-let ul=document.createElement('ul');
-let movieInput=document.getElementById('movieInput');
-let yInput=document.getElementById('yInput');
-let btn_add=document.getElementById('btn_add');
-let txtInput = document.getElementById('titleInput');
-let listingDiv = document.getElementById('listingDiv');
-let status=document.getElementById('status');
-let btn_search=document.getElementById('btn_search');
-let yearInput = document.getElementById('yearInput');
-let btn_search_y=document.getElementById('btn_search_y');
-let btn_search_g=document.getElementById('btn_search_g');
-let btn_top = document.getElementById('btn_top');
-let btn_wst = document.getElementById('btn_wst');
-let add_r;
-let add_g;
-
-// === REVEALING MODULE PATTERN ===
+//====================
+// REVEALING MODULE PATTERN
+//====================
 let outputData = (function() {
-
-    //Bridging-variables
-    let myMovieObj;
+    //=== ALL ELEMENTS FROM THE USER INTERFACE ===
+    let btn_allList=document.getElementById('btn_allList');
+    let ul=document.createElement('ul');
+    let movieInput=document.getElementById('movieInput');
+    let yInput=document.getElementById('yInput');
+    let btn_add=document.getElementById('btn_add');
+    let txtInput = document.getElementById('titleInput');
+    let listingDiv = document.getElementById('listingDiv');
+    let status=document.getElementById('status');
+    let btn_search=document.getElementById('btn_search');
+    let yearInput = document.getElementById('yearInput');
+    let btn_search_y=document.getElementById('btn_search_y');
+    let btn_search_g=document.getElementById('btn_search_g');
+    let btn_top = document.getElementById('btn_top');
+    let btn_wst = document.getElementById('btn_wst');
     let add_r;
+    let add_g;
     
+    // === BRIDGING-VARIABLES ===
+    let myMovieObj;
+    //the value of this variable is to be created by the function "getYourMovie", and
+    //it is used in other functions "addGenre", "dltGenre" and "addRating"
+
+    //====================
+    // CONSTRUCTOR & PROTOTYPE
+    //====================
+    function Create (title, year){
+        this.year = year;
+        this.title=title;
+        this.ratings=[];
+        this.genres=[];
+    };
+
+    //"cover" is an optional item so far, and
+    //it isn't necessary when an instance is created
+    //that is why I created cover as a prototype of "Create"-based objects
+    Create.prototype.cover = function(imgUrl){
+        this.cover=imgUrl;
+    }
+
+    // === FUNCTIONS START HERE ===
     let getAllMovies = ()=>{
         let mlist="";
         listingDiv.innerHTML="";
@@ -37,16 +57,20 @@ let outputData = (function() {
 
     let getYourMovie = (title) =>{
         title=txtInput.value;
+        //This is only for emptying the spaces on the interface
         listingDiv.innerHTML="";
         status.innerHTML="";
+        //Checking if there is a movie, in the database, matching to the title input from the user side
         let filteredMovie= movies.filter(function(movie){
             if(movie.title == title.toLowerCase()){
                 return movie;
             }
         })
+        //Saving the matching movie as an array to a variable "myMovieObj" (= [myMovieObj])
         myMovieObj = filteredMovie;
+        //if [myMovieObj] has a movie object, print out the movie title with buttons of adding genre and rating
         if(myMovieObj.length>0){
-            listingDiv.innerHTML= `<span class="ltxt padding-side bg_op"> ${myMovieObj[0].title} (${myMovieObj[0].year})</span>
+            listingDiv.innerHTML= `<span class="ltxt padding-side bg_op"> ${myMovieObj[0].title.toUpperCase()} (${myMovieObj[0].year})</span>
             <span class="stxt green"> ${myMovieObj[0].genres.join(" / ")}</span>
             <div class="container_r">
                 <form name="form_for_rating">
@@ -99,24 +123,27 @@ let outputData = (function() {
     }
     
     let addMovie = ()=>{
-        let inspecTitle = movieInput.value.toLowerCase();
+        let inspecTitle = movieInput.value.toLowerCase(); //this is "required" to fill in on the user side
         let inspecYear = parseFloat(yInput.value);
+        //Checking if the title is filled from the user interface, start this code:
         if(inspecTitle !=""){
             let check = movies.map(function(movieArray){ return movieArray.title; });
             if(check.includes(inspecTitle)){
                 status.innerHTML = "Your input already exists in the database";
             } else {
+                //Creating a movie instance with title & year
                 let myMovie = new Create(inspecTitle, inspecYear);
                 movies.push(myMovie);
                 status.innerHTML = `Your movie has been added`;
-                listingDiv.innerHTML=movies[movies.length-1].title.toUpperCase();
+                listingDiv.innerHTML=`<span class="bg_op"> ${movies[movies.length-1].title.toUpperCase()}</span>`;
             }
-        } else { return false;}
+        } else {return false;}
         
         
     }
 
     let addRating=()=>{
+        //checking which value of rating is selected, and push it to the movie.[ratings]
         let ratingValue=document.form_for_rating.rating.selectedIndex;
             myMovieObj[0].ratings.push(ratingValue);
             status.innerHTML=`Your rating <strong>"${ratingValue}"</strong> has been added to this movie`;
@@ -124,6 +151,7 @@ let outputData = (function() {
     
     let addGenre = ()=>{
         let genreValue=document.form_for_genre.genre.value;
+        //Check first if the genre to be added does not exist in the "movie.[genres]", and then add it to the movie
         if(myMovieObj[0].genres.indexOf(genreValue) <=-1){
             myMovieObj[0].genres.push(genreValue);
             status.innerHTML=`The genre <span class="green">${genreValue}</span> has been added to this movie`;
@@ -135,6 +163,7 @@ let outputData = (function() {
     let dltGenre = ()=>{
         let genreValue=document.form_for_genre.genre.value;
         let genreIndex=myMovieObj[0].genres.indexOf(genreValue);
+        //check if there is the selected genre in the movie.[genres], and then start deleting code.
         if(genreIndex >=0){
             myMovieObj[0].genres.splice(genreIndex, 1);
             status.innerHTML=`The genre has been deleted from this movie`;
@@ -144,16 +173,20 @@ let outputData = (function() {
     }
     
     let getByYear = (yyyy)=>{
+        //filtering [movies] by the "year" of the search criterion and create a new array [yr]
         yyyy=parseFloat(yearInput.value);
         let yr = movies.filter((item)=>{
             if(item.year === yyyy){
                 return item;
             }
         });
+        //in case [yr] includes two or more objects inside, it prints out all movie with the same year "list"
         if(yr.length>0){
+            let list="";
             yr.map(function(item){
+                list += `<li><span class="padding-side bg_op">${item.title.toUpperCase()}</span> was released in ${item.year}</li>`
                 status.innerHTML="";
-                listingDiv.innerHTML= `<span class="padding-side bg_op">${item.title.toUpperCase()}</span> was released in ${item.year}`;
+                listingDiv.innerHTML= `<ul>${list}</ul>`;
             })
         } else {
             listingDiv.innerHTML="";
@@ -162,15 +195,19 @@ let outputData = (function() {
     }
     
     let getByGenre=()=>{
+        //Transforming HTMLCollections to an array [checkArray]
         let checkArray=[];
         let checkCollection=document.getElementsByClassName('check_g');
         for(let i =0; i<checkCollection.length; i++){
             checkArray.push(checkCollection[i]);
         }
+        //Taking checked "genres" and save them to another array [checkedObj]
         let checkedObj=checkArray
         .filter((item, i)=>{if(item.checked){return item.value;}})
         .map((elem)=>elem.value);
         
+        //Comparing genres in the [checkedObj] and those in the [movies]
+        //Getting movie objects that have matching genres of [checkedObj]
         let resultArray=[];
         for(let i=0; i<movies.length; i++){
             for(let j=0; j<movies[i].genres.length; j++){
@@ -181,15 +218,16 @@ let outputData = (function() {
                 } 
             }
         }
-        
+        //Removing duplicated movie objects in the array [resultArray]
         let dltDup = resultArray.filter(function(list, item, i) {
             return i.indexOf(list) === item;
         });
         
+        //Printing out all filtered movies through a looping
         if(dltDup.length>0){
             let printOut="";
             dltDup.map(function(item){
-                printOut+=`<li>${item.title.toUpperCase()}</li><li class="green">${item.genres.join(" / ")}</li>`;
+                printOut+=`<li class="bg_op padding-side">${item.title.toUpperCase()} (${item.year})</li><li class="green padding-side">${item.genres.join(" / ")}</li>`;
                 listingDiv.innerHTML=`<ul>${printOut}</ul>`;
             })
         } else {
@@ -199,31 +237,39 @@ let outputData = (function() {
     };
 
     let getRatingsAverage = ()=>{
-        //Iterate Object Array of Movies movies[i]
+        //Iterating [movies]
         for(let i =0; i<movies.length; i++){
-            //Get each ratings array movies[i].ratings
+            //Getting each ratings array movies[i].ratings
             let eachRatingArray = movies[i].ratings;
-            //Iterate ratings array to get each average of ratings
+            //Iterating [ratings] to get each rating average of movies
             let sum = 0;
             for(let j=0; j<eachRatingArray.length; j++){
                 sum+= eachRatingArray[j];
             }
-            //Create a new property "avg" to make it easier to compare value of average
+            //Creating a new property "avg" to make it easier to compare value of average
+            //thie value is to be used in other functions "getTopRating", "getWorstRating"
             movies[i].avg=sum/eachRatingArray.length;
         }
         return movies;
     };
     
     let getTopRating = ()=>{
+        //getting average value of every movie
         getRatingsAverage();
+        //creating a variable to save a list of Top Rated Moives
         let topRated="";
         listingDiv.innerHTML="";
         status.innerHTML="";
-        let allAvg = movies.map(function(item){ return item.avg});
+        //Creating a new array having ONLY avarage values [allAvg]
+        let allAvg = movies.map((item)=>item.avg);
+        //checking the highest value in the [allAvg], and getting the index of it
         let indexOfMaxValue=allAvg.indexOf(Math.max.apply(null, allAvg));
+        //getting the highest value of ratings
         let getMaxValue=movies[indexOfMaxValue].avg;
+        //Matching "indexOfMaxValue" to [movies] to get a {movie} siting on this index
         return movies.filter(function(item, i){
             if(item.avg === getMaxValue){
+                //saving a list of movies, which has the highest rating value, to "topRated"
                 topRated += `<li class="m_list padding-side bg_op mtxt"> ${item.title.toUpperCase()} (${item.year})</li>`;
                 listingDiv.innerHTML=`<ul class="ltxt">The top rated movie(s) has Rating: ${item.avg} ${topRated}</ul>`;
             }
@@ -231,11 +277,17 @@ let outputData = (function() {
     }
 
     let getWorstRating = ()=>{
+        //getting average value of every movie
         getRatingsAverage();
+        //creating a variable to save a list of Worst Rated Moives
         let lowRated="";
-        let allAvg = movies.map(function(item){ return item.avg});
+        //Creating a new array having ONLY avarage values [allAvg]
+        let allAvg = movies.map((item)=>item.avg);
+        //checking the minimum value in the [allAvg], and getting the index of it
         let indexOfMinValue=allAvg.indexOf(Math.min.apply(null, allAvg));
+        //getting the lowest value of ratings
         let getMinValue=movies[indexOfMinValue].avg;
+        //Matching "indexOfMinValue" to [movies] to get a {movie} siting on this index
         return movies.filter(function(item, i){
             if(item.avg === getMinValue){
                 lowRated += `<li class="m_list padding-side bg_op mtxt"> ${item.title.toUpperCase()} (${item.year})</li>`;
@@ -243,41 +295,28 @@ let outputData = (function() {
             }
         })
     }
+    
+    // === EVENTLISTENERS ===
+    btn_allList.addEventListener('click', getAllMovies);
+    btn_search.addEventListener('click', getYourMovie);
+    btn_search_y.addEventListener('click', getByYear);
+    btn_top.addEventListener('click', getTopRating);
+    btn_wst.addEventListener('click', getWorstRating);
+    btn_add.addEventListener('click', addMovie);
+    btn_search_g.addEventListener('click', getByGenre);
 
-    //PUBLIC methods:
+    // === PUBLIC METHODS ===
     return {
-        iMovie: addMovie,
-        iGenre: addGenre,
-        iGenreDelete: dltGenre,
-        iRating: addRating,
         oAll: getAllMovies,
         oTitle: getYourMovie,
         oYear: getByYear,
         oGenre: getByGenre,
         oTop: getTopRating,
-        oWorst: getWorstRating
+        oWorst: getWorstRating,
+        iMovie: addMovie,
+        iGenre: addGenre,
+        iGenreDelete: dltGenre,
+        iRating: addRating
     }
     
 }());
-
-// === EVENTLISTENERS ===
-btn_allList.addEventListener('click', outputData.oAll);
-btn_search.addEventListener('click', outputData.oTitle);
-btn_search_y.addEventListener('click', outputData.oYear);
-btn_top.addEventListener('click', outputData.oTop);
-btn_wst.addEventListener('click', outputData.oWorst);
-btn_add.addEventListener('click', outputData.iMovie);
-btn_search_g.addEventListener('click', outputData.oGenre);
-
-
-    // === CONSTRUCTOR & PROTOTYPE ===
-function Create (title, year){
-    this.year = year;
-    this.title=title;
-    this.ratings=[];
-    this.genres=[];
-};
-
-Create.prototype.cover = function(imgUrl){
-    this.cover=imgUrl;
-}
