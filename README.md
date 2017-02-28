@@ -3,16 +3,17 @@
 
 https://yaorangetime16.github.io/uppgifter/
 
-Module Pattern | Constructor Pattern 
+Those are the petterns I used to this assignment:
+
+Module Pattern (Revealing) | Constructor Pattern 
 ------------ | -------------
-..makes it easy to find a target function among many others | ..is useful to create an instance of a movie anywhere with its simple coding
+..makes it easy to find a target function among many others.  ..is a good way to protect variables (in combination with "let" and "const") from being unexpectedly changed from nowhere | ..is useful to create an instance of a movie anywhere with its simple coding
 
-I tried using two different modules in the beginning; one for input and the other for output, but soon, I found it was unnecessary to separate those two functions and I shouldn't do so (because some functions are connected to each other by using the same value, etc). Eventually, used one module pattern to this assignment
-
+I tried using two different modules in the beginning; one for data input and the other for output, but then I found that it was unnecessary to separate in two modules, and that it probably would make the codging more complicated (because some functions are connected to each other by using the same value, etc). Therefore, I used eventually one module to this assignment.
 
 **Advise me, please**
 
-I just counldn't come up with other ideas than this, but I used tripple for-loops in the ```getByGenre``` function. Are there any other better / smarter ways to fix it, e.g. by using ```filter()``` or ```map()```?
+I just counldn't come up with other ideas than this, but I used tripple for-loops in the ```getByGenre``` function. Are there any other ways to make it better and to reduce code-lines, e.g. by using ```filter()``` or ```map()```?
 
 
 ```javascript
