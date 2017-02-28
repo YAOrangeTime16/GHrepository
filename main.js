@@ -12,6 +12,7 @@ let status=document.getElementById('status');
 let btn_search=document.getElementById('btn_search');
 let yearInput = document.getElementById('yearInput');
 let btn_search_y=document.getElementById('btn_search_y');
+let btn_search_g=document.getElementById('btn_search_g');
 let btn_top = document.getElementById('btn_top');
 let btn_wst = document.getElementById('btn_wst');
 let add_r;
@@ -97,7 +98,7 @@ let outputData = (function() {
 
     }
     
-    let addMovie = function(){
+    let addMovie = ()=>{
         let inspecTitle = movieInput.value.toLowerCase();
         let inspecYear = parseFloat(yInput.value);
         if(inspecTitle !=""){
@@ -115,7 +116,7 @@ let outputData = (function() {
         
     }
 
-    let addRating=function(){
+    let addRating=()=>{
         let ratingValue=document.form_for_rating.rating.selectedIndex;
             myMovieObj[0].ratings.push(ratingValue);
             status.innerHTML=`Your rating <strong>"${ratingValue}"</strong> has been added to this movie`;
@@ -127,7 +128,7 @@ let outputData = (function() {
             myMovieObj[0].genres.push(genreValue);
             status.innerHTML=`The genre <span class="green">${genreValue}</span> has been added to this movie`;
         } else {
-            listingDiv.innerHTML=`<span class="green">${genreValue}</span> genre already exists in this movie`;
+            status.innerHTML=`<span class="green">${genreValue}</span> genre already exists in this movie`;
         }
     }
 
@@ -155,13 +156,46 @@ let outputData = (function() {
                 listingDiv.innerHTML= `<span class="padding-side bg_op">${item.title.toUpperCase()}</span> was released in ${item.year}`;
             })
         } else {
-             listingDiv.innerHTML="";
+            listingDiv.innerHTML="";
             status.innerHTML=`There is no movie data released in ${yyyy}`;
         }
     }
     
-    let getByGenre=(gr)=>{
+    let getByGenre=()=>{
+        let checkArray=[];
+        let checkCollection=document.getElementsByClassName('check_g');
+        for(let i =0; i<checkCollection.length; i++){
+            checkArray.push(checkCollection[i]);
+        }
+        let checkedObj=checkArray
+        .filter((item, i)=>{if(item.checked){return item.value;}})
+        .map((elem)=>elem.value);
         
+        let resultArray=[];
+        for(let i=0; i<movies.length; i++){
+            for(let j=0; j<movies[i].genres.length; j++){
+                for(let k=0; k<checkedObj.length; k++){
+                    if(movies[i].genres[j] === checkedObj[k]){
+                    resultArray.push(movies[i]);
+                    }
+                } 
+            }
+        }
+        
+        let dltDup = resultArray.filter(function(list, item, i) {
+            return i.indexOf(list) === item;
+        });
+        
+        if(dltDup.length>0){
+            let printOut="";
+            dltDup.map(function(item){
+                printOut+=`<li>${item.title.toUpperCase()}</li><li class="green">${item.genres.join(" / ")}</li>`;
+                listingDiv.innerHTML=`<ul>${printOut}</ul>`;
+            })
+        } else {
+            listingDiv.innerHTML="";
+            status.innerHTML=`There is no matching movie in the database`;
+        }
     };
 
     let getRatingsAverage = ()=>{
@@ -219,6 +253,7 @@ let outputData = (function() {
         oAll: getAllMovies,
         oTitle: getYourMovie,
         oYear: getByYear,
+        oGenre: getByGenre,
         oTop: getTopRating,
         oWorst: getWorstRating
     }
@@ -232,6 +267,7 @@ btn_search_y.addEventListener('click', outputData.oYear);
 btn_top.addEventListener('click', outputData.oTop);
 btn_wst.addEventListener('click', outputData.oWorst);
 btn_add.addEventListener('click', outputData.iMovie);
+btn_search_g.addEventListener('click', outputData.oGenre);
 
 
     // === CONSTRUCTOR & PROTOTYPE ===

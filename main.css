@@ -10,31 +10,40 @@ html, body, main {
 body {
 	background-color: #262626;
 }
+
 div {
-	padding: 10px;
+	padding: 1rem 0;
+}
+
+ul {
+    margin: 0;
 }
 
 li {
 	list-style: none;
-	margin: 16px;
+	margin: 1.5rem;
 }
 
 input, button {
     margin-left: 12px;
+    font-family: "Open Sans";
 }
 
 .btn {
     display: inline-block;
 	width: 172px;
+    line-height: 24px;
 	text-align: center;
-	text-decoration: none;
-	line-height: 38px;
-	outline: none;
     background-color: #125c50;
 	color: #fff;
 }
 .btn:hover {
 	background-color: #07241f;
+}
+
+.checkbox_div {
+    margin-left: 4rem;
+    padding: 0.5rem 0;
 }
 
 .ltxt{
@@ -84,4 +93,8 @@ input, button {
 	color: white;
 	width: 50%;
 	height: auto;
+}
+
+#status {
+    margin-top: 1rem;
 }
