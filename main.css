@@ -1,0 +1,87 @@
+html, body, main {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+    font-family: "Open Sans";
+    font-weight: 200;
+}
+
+body {
+	background-color: #262626;
+}
+div {
+	padding: 10px;
+}
+
+li {
+	list-style: none;
+	margin: 16px;
+}
+
+input, button {
+    margin-left: 12px;
+}
+
+.btn {
+    display: inline-block;
+	width: 172px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 38px;
+	outline: none;
+    background-color: #125c50;
+	color: #fff;
+}
+.btn:hover {
+	background-color: #07241f;
+}
+
+.ltxt{
+	font-size: 28px;
+}
+
+.mtxt, #listingDiv {
+	font-size: 22px;
+}
+
+.stxt {
+	font-size: 18px;
+}
+
+.green {
+	background-color: #125c50;
+    padding: 5px;
+}
+
+.bg_op {
+    background-color: rgba(159, 62, 62, 0.6);
+}
+
+.no_margin {
+    margin: 0;
+}
+
+.padding-side {
+    padding: 0 1rem;
+}
+
+.container_r {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
+.container_c {
+	display: flex;
+	flex-direction: column;
+}
+.label_g {
+    color: white;
+}
+
+.result {
+	color: white;
+	width: 50%;
+	height: auto;
+}
