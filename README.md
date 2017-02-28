@@ -1,7 +1,7 @@
 # JavaScript 2: Yoko Andrae
 ### Design Pattern
 
-https://yaorangetime16.github.io/Uppgifter/
+https://yaorangetime16.github.io/uppgifter/
 
 Module Pattern | Constructor Pattern 
 ------------ | -------------
