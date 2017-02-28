@@ -9,9 +9,11 @@ Module Pattern | Constructor Pattern
 
 I tried using two different modules in the beginning; one for input and the other for output, but soon, I found it was unnecessary to separate those two functions and I shouldn't do so (because some functions are connected to each other by using the same value, etc). Eventually, used one module pattern to this assignment
 
+
 **Advise me, please**
 
 I just counldn't come up with other ideas than this, but I used tripple for-loops in the ```getByGenre``` function. Are there any other better / smarter ways to fix it, e.g. by using ```filter()``` or ```map()```?
+
 
 ```javascript
 let resultArray=[];
