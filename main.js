@@ -5,20 +5,21 @@
 //====================
 let outputData = (function() {
     //=== ALL ELEMENTS FROM THE USER INTERFACE ===
-    let btn_allList=document.getElementById('btn_allList');
-    let ul=document.createElement('ul');
-    let movieInput=document.getElementById('movieInput');
-    let yInput=document.getElementById('yInput');
-    let btn_add=document.getElementById('btn_add');
-    let txtInput = document.getElementById('titleInput');
-    let listingDiv = document.getElementById('listingDiv');
-    let status=document.getElementById('status');
-    let btn_search=document.getElementById('btn_search');
-    let yearInput = document.getElementById('yearInput');
-    let btn_search_y=document.getElementById('btn_search_y');
-    let btn_search_g=document.getElementById('btn_search_g');
-    let btn_top = document.getElementById('btn_top');
-    let btn_wst = document.getElementById('btn_wst');
+    const btn_allList=document.getElementById('btn_allList');
+    const ul=document.createElement('ul');
+    const movieInput=document.getElementById('movieInput');
+    const yInput=document.getElementById('yInput');
+    const btn_add=document.getElementById('btn_add');
+    const txtInput = document.getElementById('titleInput');
+    const listingDiv = document.getElementById('listingDiv');
+    const status=document.getElementById('status');
+    const btn_search=document.getElementById('btn_search');
+    const yearInput = document.getElementById('yearInput');
+    const btn_search_y=document.getElementById('btn_search_y');
+    const btn_search_g=document.getElementById('btn_search_g');
+    const btn_top = document.getElementById('btn_top');
+    const btn_wst = document.getElementById('btn_wst');
+    //Those two elements are holding dynamic elements from the function "getYourMovie"
     let add_r;
     let add_g;
     
@@ -127,7 +128,7 @@ let outputData = (function() {
         let inspecYear = parseFloat(yInput.value);
         //Checking if the title is filled from the user interface, start this code:
         if(inspecTitle !=""){
-            let check = movies.map(function(movieArray){ return movieArray.title; });
+            let check = movies.map((movieArray)=>movieArray.title);
             if(check.includes(inspecTitle)){
                 status.innerHTML = "Your input already exists in the database";
             } else {
@@ -267,7 +268,7 @@ let outputData = (function() {
         //getting the highest value of ratings
         let getMaxValue=movies[indexOfMaxValue].avg;
         //Matching "indexOfMaxValue" to [movies] to get a {movie} siting on this index
-        return movies.filter(function(item, i){
+        return movies.filter((item, i)=>{
             if(item.avg === getMaxValue){
                 //saving a list of movies, which has the highest rating value, to "topRated"
                 topRated += `<li class="m_list padding-side bg_op mtxt"> ${item.title.toUpperCase()} (${item.year})</li>`;
@@ -288,7 +289,7 @@ let outputData = (function() {
         //getting the lowest value of ratings
         let getMinValue=movies[indexOfMinValue].avg;
         //Matching "indexOfMinValue" to [movies] to get a {movie} siting on this index
-        return movies.filter(function(item, i){
+        return movies.filter((item, i)=>{
             if(item.avg === getMinValue){
                 lowRated += `<li class="m_list padding-side bg_op mtxt"> ${item.title.toUpperCase()} (${item.year})</li>`;
                 listingDiv.innerHTML=`<ul class="ltxt">The worst rated movie(s) has Rating: ${item.avg}  ${lowRated}</ul>`;
