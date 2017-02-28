@@ -19,7 +19,7 @@
                         <input type="button" class="btn" id="btn_top" value="Top Rated Movie">
                         <input type="button" class="btn" id="btn_wst" value="Worst Rated Movie">
                     </li>
-                    <!-- add rating & genre, search by title -->
+                    <!-- search by title -->
                     <li>
                         <input type="text" id="titleInput" placeholder="Search by Title">
                         <input type="button" id="btn_search" value="Search">
@@ -29,8 +29,9 @@
                         <input type="number" id="yearInput" placeholder="Search by Year : yyyy">
                         <input type="button" id="btn_search_y" value="Search">
                     </li>
+                </ul>
+                <div class="checkbox_div">
                     <!-- search by genre -->
-                    <li>
                         <input type="checkbox" id="adventure" class="check_g" value="adventure">
                         <label for="adventure" class="label_g">Adventure</label>
                         <input type="checkbox" id="action" class="check_g" value="action">
@@ -39,25 +40,27 @@
                         <label for="animation" class="label_g">Animation</label>
                         <input type="checkbox" id="comedy" class="check_g" value="comedy">
                         <label for="comedy" class="label_g">Comedy</label>
-                    </li>
-                    <li>
                         <input type="checkbox" id="drama" class="check_g" value="drama">
                         <label for="drama" class="label_g">Drama</label>
+                </div>
+                <div class="checkbox_div">
                         <input type="checkbox" id="family" class="check_g" value="family">
                         <label for="family" class="label_g">Family</label>
                         <input type="checkbox" id="fantasy" class="check_g" value="fantasy">
                         <label for="fantasy" class="label_g">Fantasy</label>
                         <input type="checkbox" id="mistery" class="check_g" value="mistery">
                         <label for="mistery" class="label_g">Mistery</label>
-                    </li>
-                    <li>
                         <input type="checkbox" id="romance" class="check_g" value="romance">
                         <label for="romance" class="label_g">Romance</label>
                         <input type="checkbox" id="sf" class="check_g" value="sf">
                         <label for="sf" class="label_g">SF</label>
                         <input type="checkbox" id="war" class="check_g" value="war">
                         <label for="war" class="label_g">War</label>
-                    </li>
+                </div>
+                <div class="checkbox_div">
+                        <input type="button" id="btn_search_g" value="Search By Genre">
+                </div>
+                <ul>
                     <!-- add a movie to DB -->
                     <li>
                         <form action="javascript:void(0)">
