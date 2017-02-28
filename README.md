@@ -5,12 +5,15 @@ https://yaorangetime16.github.io/Uppgifter/
 
 Module Pattern | Constructor Pattern 
 ------------ | -------------
-Easy to find a target function among many | useful to create an instance of a movie
+..makes it easy to find a target function among many others | ..is useful to create an instance of a movie
 
-Tried using two different modules; one for input and the other for output, but soon, I found it was unnecessary to separate those two functions and I shouldn't do so (because some functions are connected to each other by using the same value, etc). Eventually, used one module pattern to this assignment
+I tried using two different modules in the beginning; one for input and the other for output, but soon, I found it was unnecessary to separate those two functions and I shouldn't do so (because some functions are connected to each other by using the same value, etc). Eventually, used one module pattern to this assignment
 
-**Asking for advice**
-There is tripple for-loops in the ```getByGenre``` function. Don't know how to fix them with ```filter()``` or ```map()```.
+
+**Advise me, please**
+
+I just counldn't come up with other ideas than this, but I used tripple for-loops in the ```getByGenre``` function. Are there any other better / smarter ways to fix it, e.g. by using ```filter()``` or ```map()```?
+
 
 ```javascript
 let resultArray=[];
@@ -26,12 +29,11 @@ let resultArray=[];
 ```
 
 
-```checkedObj=[]``` is saving all checked genres from the user side
-```resultArray=[]``` is saving all movies which includes the genres of "checkedObj".
+* ```checkedObj=[]``` is saving all checked genres from the user side
+* ```resultArray=[]``` is saving all movies which includes the genres of "checkedObj".
 
 ```javascript
-movies = [{movieInDataBase1}, {movieInDataBase1}, ....]
+movies = [{movie1}, {movie2}, ....]  //Original data
 checkedObj = ["drama", "fantasy", "sf"]
-resultArray = [{movie1.genres["drama"]}, {movie2.genres["drama", "sf"]}]
+resultArray = [{movie1.genres["drama"]}, {movie2.genres["drama", "sf"]}, {movie2.genres["fantasy", "sf"]}]
 ```
-
