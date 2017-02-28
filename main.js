@@ -58,7 +58,7 @@ let outputData = (function() {
 
     let getYourMovie = (title) =>{
         title=txtInput.value;
-        //This is only for emptying the spaces on the interface
+        //This is only for clearing the spaces on the interface
         listingDiv.innerHTML="";
         status.innerHTML="";
         //Checking if there is a movie, in the database, matching to the title input from the user side
@@ -69,7 +69,8 @@ let outputData = (function() {
         })
         //Saving the matching movie as an array to a variable "myMovieObj" (= [myMovieObj])
         myMovieObj = filteredMovie;
-        //if [myMovieObj] has a movie object, print out the movie title with buttons of adding genre and rating
+        //if [myMovieObj] has a movie object, print out the movie title
+        //And if users wish to add genre and rating to the movie, they can do so from the selectors
         if(myMovieObj.length>0){
             listingDiv.innerHTML= `<span class="ltxt padding-side bg_op"> ${myMovieObj[0].title.toUpperCase()} (${myMovieObj[0].year})</span>
             <span class="stxt green"> ${myMovieObj[0].genres.join(" / ")}</span>
@@ -121,7 +122,7 @@ let outputData = (function() {
             listingDiv.innerHTML='there is no matching movie';
         }
 
-    }
+    };
     
     let addMovie = ()=>{
         let inspecTitle = movieInput.value.toLowerCase(); //this is "required" to fill in on the user side
@@ -139,16 +140,14 @@ let outputData = (function() {
                 listingDiv.innerHTML=`<span class="bg_op"> ${movies[movies.length-1].title.toUpperCase()}</span>`;
             }
         } else {return false;}
-        
-        
-    }
+    };
 
     let addRating=()=>{
         //checking which value of rating is selected, and push it to the movie.[ratings]
         let ratingValue=document.form_for_rating.rating.selectedIndex;
             myMovieObj[0].ratings.push(ratingValue);
             status.innerHTML=`Your rating <strong>"${ratingValue}"</strong> has been added to this movie`;
-    }
+    };
     
     let addGenre = ()=>{
         let genreValue=document.form_for_genre.genre.value;
@@ -159,7 +158,7 @@ let outputData = (function() {
         } else {
             status.innerHTML=`<span class="green">${genreValue}</span> genre already exists in this movie`;
         }
-    }
+    };
 
     let dltGenre = ()=>{
         let genreValue=document.form_for_genre.genre.value;
@@ -171,7 +170,7 @@ let outputData = (function() {
         }else {
             status.innerHTML=`There is no such genre in this movie`;
         }
-    }
+    };
     
     let getByYear = (yyyy)=>{
         //filtering [movies] by the "year" of the search criterion and create a new array [yr]
@@ -193,7 +192,7 @@ let outputData = (function() {
             listingDiv.innerHTML="";
             status.innerHTML=`There is no movie data released in ${yyyy}`;
         }
-    }
+    };
     
     let getByGenre=()=>{
         //Transforming HTMLCollections to an array [checkArray]
@@ -223,7 +222,6 @@ let outputData = (function() {
         let dltDup = resultArray.filter(function(list, item, i) {
             return i.indexOf(list) === item;
         });
-        
         //Printing out all filtered movies through a looping
         if(dltDup.length>0){
             let printOut="";
@@ -275,7 +273,7 @@ let outputData = (function() {
                 listingDiv.innerHTML=`<ul class="ltxt">The top rated movie(s) has Rating: ${item.avg} ${topRated}</ul>`;
             }
         })
-    }
+    };
 
     let getWorstRating = ()=>{
         //getting average value of every movie
@@ -295,7 +293,7 @@ let outputData = (function() {
                 listingDiv.innerHTML=`<ul class="ltxt">The worst rated movie(s) has Rating: ${item.avg}  ${lowRated}</ul>`;
             }
         })
-    }
+    };
     
     // === EVENTLISTENERS ===
     btn_allList.addEventListener('click', getAllMovies);
