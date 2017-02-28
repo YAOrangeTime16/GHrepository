@@ -1,11 +1,11 @@
-# JavaScript 2
+# JavaScript 2: Yoko Andrae
 ### Design Pattern
 
-https://yaorangetime16.github.io/Uppgifter/
+https://yaorangetime16.github.io/uppgifter/
 
 Module Pattern | Constructor Pattern 
 ------------ | -------------
-..makes it easy to find a target function among many others | ..is useful to create an instance of a movie
+..makes it easy to find a target function among many others | ..is useful to create an instance of a movie anywhere with its simple coding
 
 I tried using two different modules in the beginning; one for input and the other for output, but soon, I found it was unnecessary to separate those two functions and I shouldn't do so (because some functions are connected to each other by using the same value, etc). Eventually, used one module pattern to this assignment
 
@@ -34,6 +34,11 @@ let resultArray=[];
 
 ```javascript
 movies = [{movie1}, {movie2}, ....]  //Original data
-checkedObj = ["drama", "fantasy", "sf"]
+checkedObj = ["drama", "fantasy", "sf"]  //genres from checkboxes
+
+//↓↓↓
+//Matching data between "movies" and "checkedObj" (with the value of "genres")
+//↓↓↓
+
 resultArray = [{movie1.genres["drama"]}, {movie2.genres["drama", "sf"]}, {movie2.genres["fantasy", "sf"]}]
 ```
