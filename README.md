@@ -1,4 +1,4 @@
-# JavaScript 2
+# JavaScript 2: Yoko Andrae
 ### Design Pattern
 
 https://yaorangetime16.github.io/Uppgifter/
