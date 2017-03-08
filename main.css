@@ -29,6 +29,10 @@ input, button {
     font-family: "Open Sans";
 }
 
+.txtWhite {
+    color: white;
+}
+
 .btn {
     display: inline-block;
 	width: 172px;
@@ -95,6 +99,24 @@ input, button {
 	height: auto;
 }
 
+.img_sizing {
+    width: 30%;
+    height: auto;
+}
+
+.searchSection {
+    margin-bottom: 1rem;
+}
+
+.addMovie {
+    margin-top: 2rem;
+    border-top: 1px solid gray;
+}
+
 #status {
+    margin-top: 1rem;
+}
+
+#btn_addMovie {
     margin-top: 1rem;
 }
