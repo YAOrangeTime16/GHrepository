@@ -11,24 +11,25 @@
     <div class="container_r">
         <div class="container_c">
             <div>
-                <ul>
+                <ul><div class="searchSection">
                     <li><!-- list of all movies -->
                         <input type="button" class="btn" id="btn_allList" value="Show all the movies">
                     </li>
                     <!-- search by rating -->
                     <li>
                         <input type="button" class="btn" id="btn_top" value="Top Rated Movie">
-                        <input type="button" class="btn" id="btn_wst" value="Worst Rated Movie">
+                        <input type="button" class="btn" id="btn_worst" value="Worst Rated Movie">
                     </li>
+                    </div>
                     <!-- search by title -->
-                    <li>
-                        <input type="text" id="titleInput" placeholder="Search by Title">
+                    <li class="searchSection">
+                        <input type="text" id="seachByTitle" placeholder="Search by Title">
                         <input type="button" id="btn_search" value="Search">
                     </li>
                     <!-- search by year -->
                     <li>
-                        <input type="number" id="yearInput" placeholder="Search by Year : yyyy">
-                        <input type="button" id="btn_search_y" value="Search">
+                        <input type="number" id="searchByYear" placeholder="Search by Year : yyyy">
+                        <input type="button" id="btn_searchByYear" value="Search">
                     </li>
                 </ul>
                 <div class="checkbox_div">
@@ -59,15 +60,17 @@
                         <label for="war" class="label_g">War</label>
                 </div>
                 <div class="checkbox_div">
-                        <input type="button" id="btn_search_g" value="Search By Genre">
+                        <input type="button" id="btn_searchBygenre" value="Search By Genre">
                 </div>
-                <ul>
+                <ul class="addMovie">
                     <!-- add a movie to DB -->
+                    <li class="ltxt txtWhite">Add Your Movie</li>
                     <li>
                         <form action="javascript:void(0)">
-                            <input type="text" id="movieInput" placeholder="Add Movie by Title" required>
-                            <input type="text" id="yInput" placeholder="Add Year">
-                            <button type="submit" id="btn_add">Add Your Movie</button>
+                            <input type="text" id="movieInput" placeholder="Add Movie by Title *" required>
+                            <input type="text" id="yearInput" placeholder="Add Year">
+                            <input type="url" id="urlInput" placeholder="Add Image URL">
+                            <button type="submit" id="btn_addMovie">Add Your Movie</button>
                         </form>
                         
                     </li>
