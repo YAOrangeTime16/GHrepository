@@ -3,7 +3,7 @@
 /*====================
    REVEALING MODULE PATTERN
   ==================== */
-let database=(function(){
+const database=(function(){
         //=== ALL ELEMENTS FROM THE USER INTERFACE ===
     const btn_allList=document.getElementById('btn_allList');
     const movieInput=document.getElementById('movieInput');
@@ -103,9 +103,9 @@ let database=(function(){
         let check=userMovieObj[0].genres.indexOf(savedValue);
         if(check <=-1){
             userMovieObj[0].genres.push(savedValue);
-            addingStatus= `The genre ${savedValue} has been added to this movie`;
+            return `The genre ${savedValue} has been added to this movie`;
         } else {
-            addingStatus=`${savedValue} genre already exists in this movie`;
+            return `${savedValue} genre already exists in this movie`;
         }
         return addingStatus;
     };
@@ -116,9 +116,9 @@ let database=(function(){
         //check if there is the selected genre in the movie.[genres], and then start deleting code.
         if(genreIndex >=0){
             userMovieObj[0].genres.splice(genreIndex, 1);
-            addingStatus= `The genre has been deleted from this movie`;
+            return `The genre has been deleted from this movie`;
         }else {
-            addingStatus=`There is no such genre in this movie`;
+            return `There is no such genre in this movie`;
         }
     };
     
@@ -135,40 +135,29 @@ let database=(function(){
     };
     
     let getByGenre=()=>{
-        //Transforming HTMLCollections to an array [checkArray]
-        let checkArray=[];
+        //"HTMLCollections"
         let checkCollection=document.getElementsByClassName('check_g');
-        for(let i =0; i<checkCollection.length; i++){
-            checkArray.push(checkCollection[i]);
-        }
-        //Taking checked "genres" and save them to another array [checkedObj]
-        let checkedObj=checkArray
-        .filter((item, i)=>{if(item.checked){return item.value;}})
-        .map((elem)=>elem.value);
+        //Converting the HTMLCollections, retriving selected "genres" as values, 
+        //and then saving the values to another array [checkArray]
+        let checkArray=Array.from(checkCollection)
+        .filter(item=>item.checked)
+        .map(genre=>genre.value);
         
-        //Comparing genres in the [checkedObj] and those in the [movies]
-        //Getting movie objects that have matching genres of [checkedObj]
-        let resultArray=[];
-        for(let i=0; i<movies.length; i++){
-            for(let j=0; j<movies[i].genres.length; j++){
-                for(let k=0; k<checkedObj.length; k++){
-                    if(movies[i].genres[j] === checkedObj[k]){
-                    resultArray.push(movies[i]);
+        //Comparing genres in the [checkArray] and those in the [movies]
+        //Getting movie objects that have matching genres of [checkArray]
+        movieArray=[];
+        movieArray=movies.filter(movie=>{
+            for(let i=0; i<movie.genres.length; i++){
+                for(let j=0; j<checkArray.length; j++){
+                    if(movie.genres[i] === checkArray[j]){
+                    return movie;
                     }
-                } 
+                }
             }
-        }
-        //Removing duplicated movie objects in the array [resultArray]
-        let deleteDuplicatedMovie = resultArray.filter(function(list, item, index) {
-            return index.indexOf(list) === item;
-        });
-        
-        moviesArray=[];
-        //Saving the eventual value (array) to a bridging-variable
-        moviesArray=deleteDuplicatedMovie;
-        return moviesArray;
+        })
+        return movieArray;
     };
-
+    
     let getRatingsAverage=()=>{
         //Retriving only movies which have been added ratings (Here, movies without ratings should be eliminated)
         movieWithRatings=movies.filter(function(movieWithRating){
@@ -337,13 +326,11 @@ let database=(function(){
     };
     
     let printAddedGenre=()=>{
-        addGenre();
-        status.innerHTML=addingStatus;
+        status.innerHTML=addGenre();
     };
     
     let printDeletedGenre=()=>{
-        deleteGenre();
-        status.innerHTML=addingStatus;
+        status.innerHTML=deleteGenre();
     };
     
     let printMoviesByYear=()=>{
@@ -367,9 +354,9 @@ let database=(function(){
         status.innerHTML="";
         listingDiv.innerHTML="";
         //Printing out all filtered movies through a looping
-        if(moviesArray.length>0){
+        if(movieArray.length>0){
             let list_moviesByGenres="";
-            moviesArray.map(function(item){
+            movieArray.map(function(item){
                 list_moviesByGenres+=`<figure>
                                 <figcaption>
                                 <span class="bg_op padding-side">${item.title.toUpperCase()} (${item.year})</span><br>
