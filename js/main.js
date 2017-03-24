@@ -46,7 +46,9 @@ const database=(function(){
         this.cover=imgUrl;
     }
 
-    // === FUNCTIONS START HERE ===
+    /*====================
+      FUNCTIONS (MV*: MODEL)
+      ==================== */
     let getAllMovies=()=>{
         //Clearing old data inside the shared-array
         movieArray=[];
@@ -202,17 +204,6 @@ const database=(function(){
         return movieArray;
     };
 
-    let printTopRating=()=> {
-        getTopRating();
-        listingDiv.innerHTML="";
-        status.innerHTML="";
-        let list_topRated="";
-        movieArray.map((movieObj)=>{
-            list_topRated+=`<li class="m_list padding-side bg_op mtxt"> ${movieObj.title.toUpperCase()} (${movieObj.year})</li>`;
-        })
-        listingDiv.innerHTML=`<ul class="ltxt">The top rated movie(s) has Rating: ${movieArray[0].avg} ${list_topRated}</ul>`;
-    };
-
     let getWorstRating=()=>{
         //getting average value of every movie
         getRatingsAverage();
@@ -233,7 +224,9 @@ const database=(function(){
         return movieArray;
     };
     
-    // === FUNCTIONS TO OUTPUT ONTO THE HTML PAGE ===
+    /*====================
+      FUNCTIONS (MV*: VIEW)
+      ==================== */
 
     let printAllMovies=()=>{
         getAllMovies();
@@ -242,12 +235,13 @@ const database=(function(){
         //Saving a list of movies temporarily
         let list_allMovies="";
         movieArray.map((movieObj)=>{
-            list_allMovies+=`<figure>
-                                <figcaption>
-                                <span class="bg_op padding-side">${movieObj.title.toUpperCase()} (${movieObj.year})</span><br>
-                                <span class="green stxt padding-side">${movieObj.genres.join(" / ")}</span>
-                                </figcaption>
+            list_allMovies+=`<figure class="fig_row">
                                 <img class="img_sizing" src=${movieObj.cover}>
+                                <figcaption>
+                                    <span class="bg_op padding-side">${movieObj.title.toUpperCase()} (${movieObj.year})</span><br>
+                                    <span class="green stxt padding-side">${movieObj.genres.join(" / ")}</span>
+                                </figcaption>
+                                
                             </figure>`;
             return list_allMovies;
         });
@@ -341,7 +335,7 @@ const database=(function(){
         if(movieArray.length>0){
             let list_moviesUserYear="";
             movieArray.map(function(item){
-                list_moviesUserYear += `<figure><figcaption><span class="padding-side bg_op">${item.title.toUpperCase()}</span> was released in ${item.year}</figcaption><img class="img_sizing" src=${item.cover}><figure>`
+                list_moviesUserYear += `<figure class="fig_row"><img class="img_sizing" src=${item.cover}><figcaption><span class="padding-side bg_op">${item.title.toUpperCase()}</span> was released in ${item.year}</figcaption><figure>`
                 listingDiv.innerHTML= `${list_moviesUserYear}`;
             })
         } else {
@@ -357,18 +351,29 @@ const database=(function(){
         if(movieArray.length>0){
             let list_moviesByGenres="";
             movieArray.map(function(item){
-                list_moviesByGenres+=`<figure>
+                list_moviesByGenres+=`<figure class="fig_row">
+                                <img class="img_sizing" src=${item.cover}>
                                 <figcaption>
                                 <span class="bg_op padding-side">${item.title.toUpperCase()} (${item.year})</span><br>
                                 <span class="green stxt padding-side">${item.genres.join(" / ")}</span>
                                 </figcaption>
-                                <img class="img_sizing" src=${item.cover}>
                                 </figure>`;
                 listingDiv.innerHTML=`${list_moviesByGenres}`;
             })
         } else {
             status.innerHTML=`There is no matching movie in the database`;
         }
+    };
+    
+    let printTopRating=()=> {
+        getTopRating();
+        listingDiv.innerHTML="";
+        status.innerHTML="";
+        let list_topRated="";
+        movieArray.map((movieObj)=>{
+            list_topRated+=`<li class="m_list padding-side bg_op mtxt"> ${movieObj.title.toUpperCase()} (${movieObj.year})</li>`;
+        })
+        listingDiv.innerHTML=`<ul class="ltxt">The top rated movie(s) has Rating: ${movieArray[0].avg} ${list_topRated}</ul>`;
     };
     
     let printWorstRating=()=>{
