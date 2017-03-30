@@ -27,6 +27,9 @@ input, button {
   color: white; }
 
 .btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid white;
   display: inline-block;
   width: 172px;
   line-height: 24px;
