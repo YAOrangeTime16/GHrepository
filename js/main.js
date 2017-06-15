@@ -47,7 +47,7 @@ const database=(function(){
     }
 
     /*====================
-      FUNCTIONS (MV*: MODEL)
+      FUNCTIONS
       ==================== */
     let getAllMovies=()=>{
         //Clearing old data inside the shared-array
@@ -225,7 +225,7 @@ const database=(function(){
     };
     
     /*====================
-      FUNCTIONS (MV*: VIEW)
+      FUNCTIONS FOR OUTPUT
       ==================== */
 
     let printAllMovies=()=>{

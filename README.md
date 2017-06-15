@@ -20,7 +20,7 @@ module(function(){
     
     //Construcotor Definition;
     
-    //Functions Difinitions: Model(+Controller);
+    //Functions Difinitions: Control;
     //Functions Difinitions: View;
     
     //A list of eventLisners;
@@ -33,8 +33,8 @@ module(function(){
 ```
 
 #### Within the module:
-* MODEL: to manupulate data and return values
-* VIEW: to print out to html
+* CONTROL: to manupulate data and return values
+* VIEW: to output to html
 
 ### Note
 This is not a responsive website as it is focued on "design pattern"
