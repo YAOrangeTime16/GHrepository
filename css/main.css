@@ -66,6 +66,7 @@ input, button {
 .padding-side {
   padding: 0 1rem; }
 
+
 .container_r {
   display: flex;
   flex-direction: row;
@@ -75,6 +76,7 @@ input, button {
   width: 47%;
   display: flex;
   flex-direction: column; }
+
 
 .fig_row {
   display: flex;
